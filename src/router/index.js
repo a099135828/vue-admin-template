@@ -78,6 +78,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/sql',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'sql',
+        component: () => import('@/views/sql/index'),
+        meta: { title: 'Sql', icon: 'MySQL' }
+      }
+    ]
+  },
+
+  {
     path: '/form',
     component: Layout,
     children: [

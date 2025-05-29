@@ -3,40 +3,32 @@
     <el-table
       v-loading="listLoading"
       :data="list"
-      element-loading-text="Loading"
+      element-loading-text="加载中..."
       border
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="95">
+      <el-table-column align="center" label="课程号" width="120">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.row.cno }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+
+      <el-table-column label="课程名称">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.cname }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+
+      <el-table-column label="学分" width="100" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          {{ scope.row.ccredit }}
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+
+      <el-table-column label="先修课程" width="120" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          {{ scope.row.cpno || '无' }}
         </template>
       </el-table-column>
     </el-table>
@@ -44,35 +36,35 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
-
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      controller: new AbortController() // 用于取消请求
     }
   },
   created() {
     this.fetchData()
   },
+  beforeDestroy() {
+    this.controller.abort() // 组件销毁时取消请求
+  },
   methods: {
-    fetchData() {
-      this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
+    async fetchData() {
+      try {
+        this.listLoading = true
+        const response = await fetch('http://localhost:8080/select', {
+          signal: this.controller.signal
+        })
+        this.list = await response.json()
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('数据获取失败:', error)
+        }
+      } finally {
         this.listLoading = false
-      })
+      }
     }
   }
 }
