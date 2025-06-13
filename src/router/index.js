@@ -73,19 +73,12 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/sql',
-    component: Layout,
-    children: [
+      },
       {
         path: 'index',
         name: 'sql',
         component: () => import('@/views/sql/index'),
-        meta: { title: 'Sql', icon: 'MySQL' }
+        meta: { title: 'Sql', icon: 'code-solid' }
       }
     ]
   },
