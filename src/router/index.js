@@ -79,6 +79,18 @@ export const constantRoutes = [
         name: 'sql',
         component: () => import('@/views/sql/index'),
         meta: { title: 'Sql', icon: 'code-solid' }
+      },
+      {
+        path: 'new-course',
+        name: 'NewCourse',
+        component: () => import('@/views/course/NewCourse.vue'), // 路径根据实际存放位置调整
+        meta: { title: '新增课程' }
+      },
+      {
+        path: 'edit-course',
+        name: 'EditDeleteCourse',
+        component: () => import('@/views/course/EditDeleteCourse.vue'), // 路径根据实际存放位置调整
+        meta: { title: '管理课程' }
       }
     ]
   },
