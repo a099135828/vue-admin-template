@@ -85,6 +85,12 @@ export const constantRoutes = [
         name: 'StudentManagement',
         component: () => import('@/views/student/StudentManagement.vue'), // 路径根据实际存放位置调整
         meta: { title: '管理学生', icon: 'school-solid' }
+      },
+      {
+        path: 'aichat',
+        name: 'aichat',
+        component: () => import('@/views/aichat/index'), // 路径根据实际存放位置调整
+        meta: { title: '大模型小助手', icon: 'bot' }
       }
     ]
   },
