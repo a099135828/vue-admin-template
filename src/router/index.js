@@ -69,28 +69,22 @@ export const constantRoutes = [
         meta: { title: 'Table', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
         path: 'index',
         name: 'sql',
         component: () => import('@/views/sql/index'),
         meta: { title: 'Sql', icon: 'code-solid' }
       },
       {
-        path: 'new-course',
-        name: 'NewCourse',
-        component: () => import('@/views/course/NewCourse.vue'), // 路径根据实际存放位置调整
-        meta: { title: '新增课程' }
-      },
-      {
         path: 'edit-course',
         name: 'EditDeleteCourse',
         component: () => import('@/views/course/EditDeleteCourse.vue'), // 路径根据实际存放位置调整
-        meta: { title: '管理课程' }
+        meta: { title: '管理课程', icon: 'school-solid' }
+      },
+      {
+        path: 'manage-student',
+        name: 'StudentManagement',
+        component: () => import('@/views/student/StudentManagement.vue'), // 路径根据实际存放位置调整
+        meta: { title: '管理学生', icon: 'school-solid' }
       }
     ]
   },
