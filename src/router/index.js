@@ -56,113 +56,67 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/edit-course', // 路由 URL
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
+        path: '', // 子路由路径为空，意味着访问 /edit-course 时就渲染这个组件
+        name: 'EditDeleteCourse',
+        component: () => import('@/views/course/EditDeleteCourse'),
+        meta: { title: '课程管理', icon: 'el-icon-notebook-2' } // 显示在侧边栏的标题和图标
+      }
+    ]
+  },
+
+  {
+    path: '/manage-student',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'StudentManagement',
+        component: () => import('@/views/student/StudentManagement'),
+        meta: { title: '学生管理', icon: 'el-icon-user-solid' }
+      }
+    ]
+  },
+
+  {
+    path: '/aichat',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'AIChat',
+        component: () => import('@/views/aichat/index'),
+        meta: { title: '大模型小助手', icon: 'el-icon-service' }
+      }
+    ]
+  },
+
+  // 保留您原有的 table 和 sql 路由，同样平铺
+  {
+    path: '/table',
+    component: Layout,
+    children: [
+      {
+        path: '', // 原来是 'index'，改为 '' 使 URL 更简洁
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
+        meta: { title: '示例表格', icon: 'table' }
+      }
+    ]
+  },
+
+  {
+    path: '/sql-query', // 建议给一个更明确的路径
+    component: Layout,
+    children: [
       {
-        path: 'index',
-        name: 'sql',
+        path: '', // 原来是 'index'，改为 ''
+        name: 'SqlQuery',
         component: () => import('@/views/sql/index'),
-        meta: { title: 'Sql', icon: 'code-solid' }
-      },
-      {
-        path: 'edit-course',
-        name: 'EditDeleteCourse',
-        component: () => import('@/views/course/EditDeleteCourse.vue'), // 路径根据实际存放位置调整
-        meta: { title: '管理课程', icon: 'school-solid' }
-      },
-      {
-        path: 'manage-student',
-        name: 'StudentManagement',
-        component: () => import('@/views/student/StudentManagement.vue'), // 路径根据实际存放位置调整
-        meta: { title: '管理学生', icon: 'school-solid' }
-      },
-      {
-        path: 'aichat',
-        name: 'aichat',
-        component: () => import('@/views/aichat/index'), // 路径根据实际存放位置调整
-        meta: { title: '大模型小助手', icon: 'bot' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        meta: { title: 'SQL查询', icon: 'el-icon-coin' }
       }
     ]
   },
