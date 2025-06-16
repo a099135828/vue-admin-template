@@ -55,6 +55,20 @@ export const constantRoutes = [
     }]
   },
 
+  // 保留您原有的 table 和 sql 路由，同样平铺
+  {
+    path: '/table',
+    component: Layout,
+    children: [
+      {
+        path: '', // 原来是 'index'，改为 '' 使 URL 更简洁
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '示例表格', icon: 'table' }
+      }
+    ]
+  },
+
   {
     path: '/edit-course', // 路由 URL
     component: Layout,
@@ -82,33 +96,6 @@ export const constantRoutes = [
   },
 
   {
-    path: '/aichat',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'AIChat',
-        component: () => import('@/views/aichat/index'),
-        meta: { title: '大模型小助手', icon: 'el-icon-service' }
-      }
-    ]
-  },
-
-  // 保留您原有的 table 和 sql 路由，同样平铺
-  {
-    path: '/table',
-    component: Layout,
-    children: [
-      {
-        path: '', // 原来是 'index'，改为 '' 使 URL 更简洁
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '示例表格', icon: 'table' }
-      }
-    ]
-  },
-
-  {
     path: '/sql-query', // 建议给一个更明确的路径
     component: Layout,
     children: [
@@ -117,6 +104,19 @@ export const constantRoutes = [
         name: 'SqlQuery',
         component: () => import('@/views/sql/index'),
         meta: { title: 'SQL查询', icon: 'el-icon-coin' }
+      }
+    ]
+  },
+
+  {
+    path: '/aichat',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'AIChat',
+        component: () => import('@/views/aichat/index'),
+        meta: { title: '大模型小助手', icon: 'el-icon-service' }
       }
     ]
   },
