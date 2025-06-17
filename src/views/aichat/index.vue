@@ -79,13 +79,15 @@ export default {
       // ... (此方法保持不变)
       this.$message.info('正在准备上下文数据...');
       try {
-        const [studentsRes, coursesRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/students`),
-          axios.get(`${API_BASE_URL}/api/courses`),
+        const [studentsRes, coursesRes,scsRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/api/students/all`),
+          axios.get(`${API_BASE_URL}/api/courses/all`),
+          axios.get(`${API_BASE_URL}/api/SC/all`)
         ]);
         const studentsString = JSON.stringify(studentsRes.data, null, 2);
         const coursesString = JSON.stringify(coursesRes.data, null, 2);
-        this.contextString = `\n--- 学生数据 ---\n${studentsString}\n--- 课程数据 ---\n${coursesString}\n`;
+        const scsString = JSON.stringify(scsRes.data, null, 2);
+        this.contextString = `\n--- 学生数据 ---\n${studentsString}\n--- 课程数据 ---\n${coursesString}\n--- 联系数据 ---\n${scsString}\n`;
         this.$message.success('上下文数据准备就绪！');
       } catch (error) {
         this.$message.error('获取上下文数据失败，请检查后端服务！');
