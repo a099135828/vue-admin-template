@@ -86,12 +86,10 @@ export default {
           }
 
           request({
-            url: 'http://localhost:8080/api/courses', // 建议将基础URL配置在环境变量中
+            url: 'http://localhost:8080/api/courses',
             method: 'post',
-            data: postData // 现在 postData 的 key 是 { cno, cname, ccredit, cpno }，可以被后端正确解析
+            data: postData // 现在 postData 的 key 是 { cno, cname, ccredit, cpno }
           }).then(res => {
-            // 通常创建成功的状态码是 201 (Created)，但200也可以。根据你的后端API来判断。
-            // 这里放宽判断，只要是成功的响应就提示成功。
             this.$message.success('添加成功！')
             this.resetForm()
           }).catch(error => {

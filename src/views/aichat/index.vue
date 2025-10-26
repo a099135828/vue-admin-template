@@ -76,7 +76,6 @@ export default {
   },
   methods: {
     async fetchInitialContext() {
-      // ... (此方法保持不变)
       this.$message.info('正在准备上下文数据...');
       try {
         const [studentsRes, coursesRes,scsRes] = await Promise.all([
